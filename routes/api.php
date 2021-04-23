@@ -23,3 +23,4 @@ Route::post('/products/save', [ProductController::class, 'save']);
 Route::get('/product/show/{id}', [ProductController::class, 'show']);
 Route::put('/product/update/{id}', [ProductController::class, 'update']);
 Route::delete('/product/{id}', [ProductController::class, 'delete']);
+Route::get('/products/search/{name}', [ProductController::class, 'search']);

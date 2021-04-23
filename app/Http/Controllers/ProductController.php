@@ -58,4 +58,12 @@ class ProductController extends Controller
         $out['result'] = 'product deleted.';
         return response($out, 200);
     }
+
+    public function search($name) 
+    {
+        $product = Product::where('name', 'like', '%'.$name.'%')->get();
+        $out['status'] = 'success';
+        $out['result'] = $product;
+        return response($out, 200);
+    }
 }
