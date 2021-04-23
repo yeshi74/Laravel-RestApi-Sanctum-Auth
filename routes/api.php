@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,16 +16,15 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('/products/save', [ProductController::class, 'save']);
-});
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
+//public routes
+Route::post('/register', [AuthController::class, 'register']);
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/product/show/{id}', [ProductController::class, 'show']);
-Route::put('/product/update/{id}', [ProductController::class, 'update']);
-Route::delete('/product/{id}', [ProductController::class, 'delete']);
 Route::get('/products/search/{name}', [ProductController::class, 'search']);
+
+//protected routes
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/products/save', [ProductController::class, 'save']);
+    Route::put('/product/update/{id}', [ProductController::class, 'update']);
+    Route::delete('/product/{id}', [ProductController::class, 'delete']);
+});
