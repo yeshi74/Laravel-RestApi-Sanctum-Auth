@@ -49,4 +49,13 @@ class ProductController extends Controller
         $out['result'] = $product;
         return response($out, 200);
     }
+
+    public function delete($id)
+    {
+        $product = Product::find($id);
+        $product->delete($id);
+        $out['status'] = 'success';
+        $out['result'] = 'product deleted.';
+        return response($out, 200);
+    }
 }
