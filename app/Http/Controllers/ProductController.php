@@ -40,4 +40,13 @@ class ProductController extends Controller
         $out['status'] = 'success';
         return response($out, 200);
     }
+
+    public function update(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $product->update($request->all());
+        $out['status'] = 'success';
+        $out['result'] = $product;
+        return response($out, 200);
+    }
 }
